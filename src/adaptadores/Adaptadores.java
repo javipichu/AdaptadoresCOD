@@ -13,16 +13,39 @@ public class Adaptadores {
 
     private static class FormatAdapter implements MediaPlayer {
 
-        private MediaPackage media;
+        private MediaPackage mediaPak;
+        private MediaDivX mediaDivX;
+        private MediaPlayer mediaPlayer;
 
         public FormatAdapter(MediaPackage m) {
-            media = m;
+            mediaPak = m;
+            mediaDivX = null;
+            mediaPlayer =null;
         }
+        public FormatAdapter(MediaDivX m) {
+            mediaDivX = m;
+            mediaPak = null;
+            mediaPlayer = null;
+        }
+        public FormatAdapter(MediaPlayer m) {
+            mediaPlayer = m;
+            mediaPak = null;
+            mediaDivX = null;
+            
+        }
+        
+        
 
         @Override
         public void play(String filename) {
             System.out.print("Using Adapter --> ");
-            media.playFile(filename);
+            if(mediaPak != null){
+            mediaPak.playFile(filename);}
+            
+            if(mediaDivX != null){
+            mediaDivX.playFilm(filename);}
+             if(mediaPlayer!= null){
+            mediaPlayer.play(filename);}
         }
     }
 }
